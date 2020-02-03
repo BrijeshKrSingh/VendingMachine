@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <style>
+
+        /*wait for application*/
+        .notready {
+            display: none;
+        }
+    </style>
+
+    <div id="app" class="notready">
+
+       
+
+        <div class="row">
+            <h2>{{message}}</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="col-md-3" v-for="product in products" :key="product.id">
+                    <div style="height:100px;">
+                        <h3>{{product.name}}</h3>
+                        <h4>${{parseFloat(product.price / 100).toFixed(2)}}</h4>
+                        <h6>left: {{product.availableQuantity}}</h6>
+                    </div>
+                    <button @@click="selectProduct(product.id,product.price)" class="btn btn-primary" :disabled="product.price<=totalInsertedCoins?false:true" :title="product.price>totalInsertedCoins?'Add more $'+ parseFloat((product.price-totalInsertedCoins) / 100).toFixed(2):''">Buy</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <p v-for="availableCoin in allCoins.availableCoins" :key="availableCoin"><button class="btn-block btn-outline-dark" @@click="insertCoin(availableCoin)">Insert Coin $ {{parseFloat(availableCoin/100).toFixed(2)}}</button></p>
+
+                <h3>Inserted amount ${{parseFloat(totalInsertedCoins/100).toFixed(2)}}</h3>
+
+                <button @@click="cancel()" class="btn-block btn-outline-dark" :disabled="totalInsertedCoins>0?false:true">Cancel</button>
+
+                <h3>Total Change ${{parseFloat(totalChangeCoins/100).toFixed(2)}}</h3>
+                <p v-for="coin in allCoins.changeCoins" :key="coin.Cent+1">{{coin.Quantity}}x ${{parseFloat(coin.Cent/100).toFixed(2)}}</p>
+            </div>
+        </div>
+    </div>
