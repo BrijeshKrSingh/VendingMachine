@@ -13,6 +13,10 @@
 
 How to run the application:
 - Open solution in visual studio 
+- Open Server Explorer from View visual studio menu option 
+- Make sure Database is showing connected
+- Right click on Database  --> Properties --> copy connection string and paste value in ConnectionString of appsettings.Development.json and appsettings.json
+
 - Click to run the project
 
 - For admin ui, please follow the below link:
